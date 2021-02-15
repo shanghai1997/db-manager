@@ -1,0 +1,29 @@
+server:
+  port: 8080
+  context-path: /hongw
+
+spring:
+  mvc:
+    static-path-pattern: /static/**
+
+  datasource:
+    #type: com.alibaba.druid.pool.DruidDataSource
+    jdbc-url: jdbc:mysql://47.101.142.113:3306/myManager?serverTimezone=UTC
+    username: root
+    password: ad654790252
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    #hibernate:
+      #naming:
+        #physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      #ddl-auto: update
+    #show-sql: true
+    database-platform: org.hibernate.dialect.MySQLDialect
+
+  freemarker:
+    suffix: .ftl
+
+
+
+

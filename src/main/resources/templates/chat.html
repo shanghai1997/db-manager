@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="../static/js/chat.js"></script>
+
+    <!--引入css-->
+    <link rel="stylesheet" type="text/css" href="../static/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/select.dataTables.min.css">
+    <!--引入JavaScript-->
+
+    <script type="text/javascript" charset="utf8" src="../static/js/jquery-3.5.1.js"></script>
+    <script type="text/javascript" charset="utf8" src="../static/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="../static/js/dataTables.select.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            background-color: aliceblue;
+            margin: 0 auto;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .container {
+            border: 2px solid #dedede;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .darker {
+            border-color: #ccc;
+            background-color: #ddd;
+        }
+
+        .container::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .container img {
+            float: left;
+            max-width: 60px;
+            width: 100%;
+            margin-right: 20px;
+            border-radius: 50%;
+        }
+
+        .container img.right {
+            float: right;
+            margin-left: 20px;
+            margin-right:0;
+        }
+
+        .time-right {
+            float: right;
+            color: #aaa;
+        }
+
+        .time-left {
+            float: left;
+            color: #999;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            border-color: darkgrey
+        }
+
+        .btn {
+            border-radius: 50%;
+            background-image: linear-gradient(to top right, olive, olive);
+            border: none
+        }
+    </style>
+</head>
+<body>
+
+<h2>Chat Messages</h2>
+<div id="chat">
+    <div class="container">
+        <img src="../static/images/w.jpg" alt="Avatar" style="width:100%;">
+        <p>Love you, baby! Happy Valentine</p>
+        <span class="time-right">11:00</span>
+    </div>
+
+    <div class="container darker">
+        <img src="../static/images/winnie.jpg" alt="Avatar" class="right" style="width:100%;">
+        <p>love you, too</p>
+        <span class="time-left">11:01</span>
+    </div>
+</div>
+
+<div>
+    <label>
+        <select id="identity" class="form-control"
+                style="position: absolute; left: 35%; top: 70%; width:100px; height: 32px;">
+            <option value="Winnie">Winnie</option>
+            <option value="Hong">Hong</option>
+        </select>
+    </label>
+    <input id="post" class="form-control" placeholder="type here"
+           style="position: absolute; left: 45%; top: 70%; width: 12%; height: 32px;" type="text"
+           aria-describedby="emailHelp"/>
+    <button id="submit" class="btn"
+            style="position: absolute; left: 60%; top: 68%; height: 75px; width: 75px;" type="button">Submit
+    </button>
+</div>
+</body>
+
+<script>
+    function CreateDom(content, who) {
+        let chat = document.getElementById("chat")
+        let div = document.createElement("div");
+        let img = document.createElement("img")
+        if (who === "Hong")
+        {
+            div.className = "container"
+            img.src = "../static/images/w.jpg"
+        }
+        else
+        {
+            div.className = "container darker"
+            img.src = "../static/images/winnie.jpg"
+            img.className = "right"
+        }
+        let p = document.createElement("p")
+        p.innerText = content
+        div.appendChild(img)
+        div.appendChild(p)
+        chat.appendChild(div)
+        //let text = $("<input type=\"text\">").css({ "width": "150px", "border": "1px lightgrey solid" }).appendTo($("body"));
+    }
+</script>
+
+<script>
+    let content
+    let who
+    $(document).ready(function () {
+        $('#submit').click(function () {
+            content = $('#post').val();
+            who = $('#identity').val();
+            if (content != null)
+            {
+                CreateDom(content, who)
+            }
+
+        })
+
+    })
+</script>
+</html>

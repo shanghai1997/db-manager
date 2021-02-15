@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>demo_Winnie</title>
+    <style type="text/css">
+
+        html,body {
+            height: 100%;
+            color: #00FF00;
+        }
+
+    </style>
+
+</head>
+<!--引入css-->
+<link rel="stylesheet" type="text/css" href="../static/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="../static/css/select.dataTables.min.css">
+<!--引入JavaScript-->
+
+<script type="text/javascript" charset="utf8" src="../static/js/jquery-3.5.1.js"></script>
+<script type="text/javascript" charset="utf8" src="../static/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" charset="utf8" src="../static/js/dataTables.select.min.js"></script>
+
+<link type="text/css" href="../static/css/style.css" rel="stylesheet" />
+<link href="../static/css/loop.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+
+    html,body {
+        height: 100%;
+        color: #00FF00;
+    }
+    body{
+        background: url("../static/images/bg.jpg") ;
+        position: absolute;
+        background-size: cover;
+    }
+
+    #chat{
+        width: 200px;
+        padding:8px;
+        background-color: transparent;
+        color: aliceblue;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px; /* future proofing */
+        -khtml-border-radius: 10px; /* for old Konqueror browsers */
+        text-align: center;
+        vertical-align: middle;
+        border: 1px solid transparent;
+        font-weight: 900;
+        font-size:125%
+    }
+    button:hover {
+        color: blueviolet;
+    }
+
+</style>
+
+<body>
+<audio id="bgm" autoplay="autoplay" preload="auto">
+    <source src="../static/audio/bm.mp3" type="audio/mpeg">
+</audio>
+<div class="box">
+<ul class="minbox">
+<li><img src="../static/images/01.jpg" width="100" height="100"></li>
+<li><img src="../static/images/02.jpg" width="100" height="100"></li>
+<li><img src="../static/images/03.jpg" width="100" height="100"></li>
+<li><img src="../static/images/04.jpg" width="100" height="100"></li>
+<li><img src="../static/images/05.jpg" width="100" height="100"></li>
+<li><img src="../static/images/06.jpg" width="100" height="100"></li>
+</ul>
+<ol class="maxbox">
+<li><img src="../static/images/1.jpg" width="400" height="400"></li>
+<li><img src="../static/images/2.jpg" width="400" height="400"></li>
+<li><img src="../static/images/3.jpg" width="400" height="400"></li>
+<li><img src="../static/images/4.jpg" width="400" height="400"></li>
+<li><img src="../static/images/5.jpg" width="400" height="400"></li>
+<li><img src="../static/images/6.jpg" width="400" height="400"></li>
+</ol>
+</div>
+<div>
+        <!--        <input type="submit" value="post请求" name="bow"/>-->
+    <p></p>
+
+
+    <button id = "chat">
+        Winnie Sweetie ChatBox✎▤
+    </button>
+</div>
+</body>
+<script>
+    $(document).ready(function () {
+        $('#chat').click(function () {
+            window.location.href = "/hongw/chat"
+        })
+    })
+</script>
+
+</html>
+
