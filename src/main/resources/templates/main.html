@@ -237,105 +237,6 @@
 </div>
 
 <script>
-    //meta
-    $(document).ready(function ()
-    {
-        $.ajax({
-            type: "GET",
-            url: "http://localhost:8080/hongw/getProducts",
-            data: null,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (data) {
-                //initialize datatable
-                $(document).ready(function () {
-
-                    // configure datatable
-                    $('#example').DataTable({
-
-                        "data": data,
-
-                        "columnDefs": [
-                            {
-                                'orderable': false,
-                                'data': null,
-                                'targets': 0,
-                                'defaultContent': '',
-                                'className': 'select-checkbox'
-                            },
-                            {
-                                'targets': 1, "title": "id", "data": "id"
-                            },
-                            {
-                                'targets': 2, "title": "product name", "data": "productName"
-                            },
-                            {
-                                'targets': 3, "title": "quantity in storage", "data": "number"
-                            },
-                            {
-                                'targets': 4, "title": "selling price", "data": "price"
-                            },
-                            {
-                                'targets': 5, "title": "cost", "data": "cost"
-                            },
-                            {
-                                'targets': 6, "title": "supplier", "data": "supplier"
-                            },
-                            {
-                                'targets': 7, "title": "listed date", "data": "listedDate"
-                            },
-                            {
-                                'targets': 8, "title": "on sale", "data": "discounted"
-                            }
-                        ],
-                        'select': {
-                            'style': 'multi',
-                            'selector': 'td'
-                        },
-                        'order': [
-                            [1, 'asc']
-                        ]
-
-                    });
-
-                });
-
-            },
-            error: function (jqXHR, exception) {
-                //enable buttons
-                $("button").prop("disabled", false);
-
-                let msg = '';
-                if (jqXHR.status === 0) {
-                    msg = 'Not connect.\n Verify Network.';
-                } else if (jqXHR.status === 404) {
-                    msg = 'Requested page not found. [404]';
-                } else if (jqXHR.status === 500) {
-                    msg = 'Internal Server Error [500].';
-                } else if (exception === 'parsererror') {
-                    msg = 'Requested JSON parse failed.';
-                } else if (exception === 'timeout') {
-                    msg = 'Time out error.';
-                } else if (exception === 'abort') {
-                    msg = 'Ajax request aborted.';
-                } else {
-                    msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                }
-                alert(msg);
-                console.log(exception.status);
-                console.log(exception.responseText);
-            }
-        });
-
-    });
-
-    //global variable
-    var username;
-    var password
-    var studyPlanType
-    var environment
-    var product
-    var refresh = false;
 
     // search 点击事件
     $(document).ready(function () {
@@ -348,65 +249,14 @@
             if ($.fn.DataTable.isDataTable('#example')) {
                 $('#example').DataTable().destroy();
             }
-            if (refresh === false) {
-                username = $('#username2').val();
-                password = $('#password2').val();
-                studyPlanType = parseInt($('#studyPlanType').val());
-                environment = $('#environment2').val();
-                product = 2;
-            }
 
-            if (username === "") {
-                alert("username cannot be null");
-                $("button").prop("disabled", false);
-                return;
-            }
-            if (password === "") {
-                alert("password cannot be null");
-                $("button").prop("disabled", false);
-                return;
-            }
-
-            // use API to get data
-            let list = JSON.stringify({
-                env: environment,
-                username: username,
-                password: password,
-                product: product,
-                productModule: studyPlanType
-            });
-
-            // empty user name and password info
-            $(document).ready(function () {
-                $('#username2').prop("value", null);
-                $('#password2').prop('value', null);
-            });
-
-            // use API to get study plans
             $.ajax({
-                type: "POST",
-                url: "http://localhost:8080/hongw/getstudyplan",
-                data: list,
+                type: "GET",
+                url: "http://localhost:8080/hongw/getProducts",
+                data: null,
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
-
-                    //initialize two maps
-                    let productMap = new Map();
-                    let productModuleMap = new Map();
-                    productMap.set(1, "SmallStar");
-                    productMap.set(2, "HighFlyer");
-                    productModuleMap.set(1, "Homework");
-                    productModuleMap.set(16, "Progress Test");
-                    productModuleMap.set(256, "Session");
-                    productModuleMap.set(512, "Reader");
-
-                    //change data
-                    data.forEach(function (ele) {
-                        ele["product"] = productMap.get(ele["product"]);
-                        ele["productModule"] = productModuleMap.get(ele["productModule"]);
-                    });
-
                     //initialize datatable
                     $(document).ready(function () {
 
@@ -427,13 +277,13 @@
                                     'targets': 1, "title": "id", "data": "id"
                                 },
                                 {
-                                    'targets': 2, "title": "product name", "data": "product_name"
+                                    'targets': 2, "title": "product name", "data": "productName"
                                 },
                                 {
                                     'targets': 3, "title": "quantity in storage", "data": "number"
                                 },
                                 {
-                                    'targets': 4, "title": "selling price", "data": "selling_price"
+                                    'targets': 4, "title": "selling price", "data": "price"
                                 },
                                 {
                                     'targets': 5, "title": "cost", "data": "cost"
@@ -442,10 +292,10 @@
                                     'targets': 6, "title": "supplier", "data": "supplier"
                                 },
                                 {
-                                    'targets': 7, "title": "listed date", "data": "date_listed"
+                                    'targets': 7, "title": "listed date", "data": "listedDate"
                                 },
                                 {
-                                    'targets': 8, "title": "on sale", "data": "on_sale"
+                                    'targets': 8, "title": "on sale", "data": "discounted"
                                 }
                             ],
                             'select': {
@@ -460,8 +310,6 @@
 
                     });
 
-                    refresh = false;
-                    //enable buttons
                     $("button").prop("disabled", false);
 
                 },
@@ -485,79 +333,15 @@
                     } else {
                         msg = 'Uncaught Error.\n' + jqXHR.responseText;
                     }
-                    refresh = false;
                     alert(msg);
                     console.log(exception.status);
                     console.log(exception.responseText);
                 }
             });
-
-
         })
     });
 
-    // markComplete 点击事件
-    $(document).ready(function () {
-        $('#markComplete').click(function () {
 
-            //disable buttons
-            $("button").prop("disabled", true);
-
-            let table = $('#example').DataTable();
-            let studyPlans = table.rows({selected: true}).data().toArray();
-
-            //initialize two maps
-            let productMap = new Map();
-            let productModuleMap = new Map();
-            productMap.set("SmallStar", 1);
-            productMap.set("HighFlyer", 2);
-            productModuleMap.set("Homework", 1);
-            productModuleMap.set("Progress Test", 16);
-            productModuleMap.set("Session", 256);
-            productModuleMap.set("Reader", 512);
-
-            //change study plan data
-            studyPlans.forEach(function (sp) {
-                sp["product"] = productMap.get(sp["product"]);
-                sp["productModule"] = productModuleMap.get(sp["productModule"]);
-            });
-
-            let list = JSON.stringify({
-                env: environment,
-                username: username,
-                password: password,
-                product: product,
-                productModule: studyPlanType,
-                studyPlans: studyPlans
-            });
-            // 调用API 进行 mark complete
-            $.ajax({
-                type: "POST",
-                url: "http://localhost:8080/hongw/submitstudyplan",
-                data: list,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (map) {
-                    // success handling
-                    alert(map["message"]);
-                    // refresh page
-                    refresh = true;
-                    //enable buttons
-                    $("button").prop("disabled", false);
-
-                    $('#search').trigger("click");
-                },
-                error: function (exception) {
-                    //enable buttons
-                    $("button").prop("disabled", false);
-                    alert(exception.responseText);
-
-                }
-            });
-
-        });
-    });
-</script>
 
 
 
