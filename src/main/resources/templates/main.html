@@ -238,7 +238,7 @@
 <script>
     var name;
     var num;
-    var cost = 0;
+    var cost;
     var price;
     var date;
     var supplier;
@@ -251,7 +251,8 @@
             num = parseInt($('#num').val());
             price = parseInt($('#price').val());
             date = $('#date').val();
-
+            cost = (Math.random())*(100);
+            supplier = $('#supplier').val();
 
             //disable all buttons
             $("button").prop("disabled", true);
@@ -269,6 +270,11 @@
                 cost: cost,
                 listedDate: date,
                 soldOut:soldOut
+            });
+
+            // empty all input value
+            $(document).ready(function (){
+                $('input').prop("value", null);
             });
 
             $.ajax({
