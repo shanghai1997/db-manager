@@ -1,9 +1,7 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.dao.ProductRepository;
 import com.example.demo.entity.Product;
-
 import com.example.demo.entity.UserInfo;
 import com.example.demo.service.DemoService;
 import lombok.extern.slf4j.Slf4j;
@@ -36,10 +34,20 @@ public class MainController {
         return demoService.generateAllInfo();
     }
 
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String index(ModelMap modelMap) {
-        modelMap.put("msg", "SpringBoot Ajax Sample");
-        return "index";
+    @RequestMapping(value = "/addProducts", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Map<String, Object> addProducts(@RequestBody Product p) throws IOException {
+        try {
+            demoService.addNewProduct(p);
+            Map<String, Object> result = new HashMap<>();
+            result.put("status", 200);
+            result.put("message", "success");
+            return result;
+        } catch (Exception e) {
+            log.error(String.valueOf(e.getMessage()));
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     @RequestMapping(value = "/chat", method = RequestMethod.GET)

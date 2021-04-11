@@ -22,5 +22,14 @@ public class DemoService {
         return pList;
     }
 
+    public int deleteSoldOut()
+    {
+        return productRepository.deleteDeactivatedProducts();
+    }
 
+    public void addNewProduct(Product p)
+    {
+        productRepository.insertUser(p.getProductName(), p.getNumber(), p.getPrice(), p.getCost(), p.getSupplier(), p.getListedDate(), true);
+    }
+    
 }

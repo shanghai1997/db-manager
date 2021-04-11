@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -37,9 +38,9 @@ public class Product {
     private String supplier;//供货商
 
     @Column(name = "date_listed")
-    private Date listedDate;//日期,因为没有使用空间，先使用字符串表示
+    private LocalDate listedDate;//日期,因为没有使用空间，先使用字符串表示
 
     @Column(name = "on_sale")
-    private boolean discounted;
+    private boolean soldOut;
 }
 

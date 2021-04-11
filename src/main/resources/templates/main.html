@@ -150,23 +150,22 @@
             <option value="2">STAGE</option>
         </select>
     </label>
-    <input id="username1" class="form-control" placeholder="Username"
+    <input id="name" class="form-control" placeholder="Product Name"
            style="position: absolute; left: 18.6192%; top: 7.30659%; width: 12%; height: 32px;" type="text"
            aria-describedby="emailHelp"/>
-    <input id="password1" class="form-control" placeholder="Password"
+    <input id="num" class="form-control" placeholder="Number"
            style="position: absolute; left: 35.1464%; top: 7.30659%; width: 12%; height: 32px;" type="text"
            aria-describedby="emailHelp"/>
 
     <i>
-        <input id="contentPath" class="form-control" placeholder="Create Study Plan Content Path"
+        <input id="supplier" class="form-control" placeholder="Supplier"
                style="position: absolute; left: 2.40586%; top: 15.6046%; height: 32px; width: 36%;" type="text"
                aria-describedby="emailHelp"/>
-        <i class="smallText" style="position: absolute; left: 3.40586%; top: 20%; width: 20%;">highflyers/cn-3/book-2/unit-1/assignment-2</i>
     </i>
-    <input id="startWeek" class="form-control" placeholder="Start Week Date"
+    <input id="date" class="form-control" placeholder="Date Listed"
            style="position: absolute; left: 41.2134%; top: 15.6046%; height: 32px; width: 22%;" type="text"
            aria-describedby="emailHelp"/>
-    <i class="smallText" style="position: absolute; left: 42.40586%; top: 20%; width: 20%;">yyyy/mm/dd hh:mm:ss</i>
+    <i class="smallText" style="position: absolute; left: 42.40586%; top: 20%; width: 20%;">format: yyyy-mm-dd  eg: 2000-01-01</i>
     <span id="4b53da2d-4913-4051-b4c7-a2a80017acfc" class="form-check form-check-inline"
           style="position: absolute; left: 2.40586%; top: 25.3582%; width: 5%;">
 		<label class="form-check-label" style="top: -280px;">
@@ -181,12 +180,12 @@
             <div class="inner"></div>
 		</label>
 	</span>
-    <input id="pl_datetime" class="form-control" placeholder="Datetime"
+    <input id="pl_datetime" class="form-control" placeholder="Price"
            style="position: absolute; left: 18.2929%; top: 27.3582%; height: 32px; width: 19%;" type="text"
            aria-describedby="emailHelp"/>
-    <i class="smallText" style="position: absolute; left: 19.5%; top: 32%; width: 20%;">yyyy/mm/dd hh:mm:ss</i>
-    <button id="399aca18-ed3b-4c5e-97bb-2f190bc44056" class="btn btn-info"
-            style="position: absolute; left: 79.2887%; top: 23.3582%; height: 75px; width: 75px;" type="button">Submit
+    <i class="smallText" style="position: absolute; left: 19.5%; top: 32%; width: 20%;"></i>
+    <button id="insert" class="btn btn-info"
+            style="position: absolute; left: 79.2887%; top: 23.3582%; height: 75px; width: 75px;" type="button">Insert
     </button>
     <hr style="position: absolute; left: 2.40586%; top: 33.5244%; width: 100%; background-color: rgb(153, 153, 153); border-top-style: double; height: 1px;"/>
 
@@ -237,6 +236,64 @@
 </div>
 
 <script>
+    var name;
+    var num;
+    var cost = 0;
+    var price;
+    var date;
+    var supplier;
+    var soldOut;
+
+    $(document).ready(function () {
+        $('#insert').click(function () {
+
+            name = $('#name').val();
+            num = parseInt($('#num').val());
+            price = parseInt($('#price').val());
+            date = $('#date').val();
+
+
+            //disable all buttons
+            $("button").prop("disabled", true);
+
+            // destroy datatable if it already exists
+            if ($.fn.DataTable.isDataTable('#example')) {
+                $('#example').DataTable().destroy();
+            }
+
+            let list = JSON.stringify({
+                productName: name,
+                number: num,
+                supplier: supplier,
+                price: price,
+                cost: cost,
+                listedDate: date,
+                soldOut:soldOut
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "/hongw/addProducts",
+                data: list,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(map) {
+                    // success handling
+                    alert(map["message"]);
+                    //enable buttons
+                    $("button").prop("disabled", false);
+
+                    $('#search').trigger("click");
+                },
+                error: function(exception){
+                    //enable buttons
+                    $("button").prop("disabled", false);
+                    alert(exception.responseText);
+
+                }
+            });
+        })
+    });
 
     // search 点击事件
     $(document).ready(function () {
@@ -252,7 +309,7 @@
 
             $.ajax({
                 type: "GET",
-                url: "http://localhost:8080/hongw/getProducts",
+                url: "/hongw/getProducts",
                 data: null,
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -295,7 +352,7 @@
                                     'targets': 7, "title": "listed date", "data": "listedDate"
                                 },
                                 {
-                                    'targets': 8, "title": "on sale", "data": "discounted"
+                                    'targets': 8, "title": "Sold Out", "data": "soldOut"
                                 }
                             ],
                             'select': {
