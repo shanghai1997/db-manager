@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 
 import com.example.demo.entity.Product;
+import com.example.demo.entity.ProductContext;
 import com.example.demo.entity.UserInfo;
 import com.example.demo.service.DemoService;
 import lombok.extern.slf4j.Slf4j;
@@ -40,6 +41,26 @@ public class MainController {
     public Map<String, Object> addProducts(@RequestBody Product p) throws IOException {
         try {
             demoService.addNewProduct(p);
+            Map<String, Object> result = new HashMap<>();
+            result.put("status", 200);
+            result.put("message", "success");
+            return result;
+        } catch (Exception e) {
+            log.error(String.valueOf(e.getMessage()));
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "/deleteProducts", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Map<String, Object> deleteProducts(@RequestBody ProductContext pc) throws IOException {
+        try {
+            List<Product> ls = pc.getProducts();
+            for(Product p:ls)
+            {
+                demoService.deleteProduct(p);
+            }
             Map<String, Object> result = new HashMap<>();
             result.put("status", 200);
             result.put("message", "success");

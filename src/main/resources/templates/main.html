@@ -71,7 +71,7 @@
             border: none
         }
 
-        #markComplete {
+        #deleteP {
             border-radius: 8px
         }
 
@@ -215,9 +215,8 @@
     </label>
 
 
-    <button id="markComplete" class="btn btn-info"
-            style="position: absolute; left: 74.7741%; top: 52.4069%; height: 35px; width: 14%;" type="button">Mark
-        Complete
+    <button id="deleteP" class="btn btn-info"
+            style="position: absolute; left: 74.7741%; top: 52.4069%; height: 35px; width: 14%;" type="button">Delete Products
     </button>
     <button id="search" class="btn btn-info"
             style="position: absolute; left: 79.2887%; top: 39.2607%; height: 75px; width: 75px;" type="button">Search
@@ -298,6 +297,45 @@
 
                 }
             });
+        })
+    });
+
+    $(document).ready(function (){
+        $('#deleteP').click(function () {
+
+            //disable buttons
+            $("button").prop("disabled", true);
+
+            let table = $('#example').DataTable();
+            let products = table.rows({selected: true}).data().toArray();
+
+            let list = JSON.stringify({
+                products:products
+            });
+
+            // 调用API 进行 mark complete
+            $.ajax({
+                type: "POST",
+                url: "/hongw/deleteProducts",
+                data: list,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(map) {
+                    // success handling
+                    alert(map["message"]);
+
+                    //enable buttons
+                    $("button").prop("disabled", false);
+                    $('#search').trigger("click");
+                },
+                error: function(exception){
+                    //enable buttons
+                    $("button").prop("disabled", false);
+                    alert(exception.responseText);
+
+                }
+            });
+
         })
     });
 

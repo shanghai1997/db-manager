@@ -43,10 +43,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findProductWithinTimeRange(@Param("d1") Date startingDate, @Param("d2") Date endingDate);
 
     @Modifying
-    @Query("DELETE FROM Product p WHERE p.soldOut = true")
-    int deleteDeactivatedProducts();
+    @Query("DELETE FROM Product p WHERE p.id = :ID")
+    void deleteProductByID(@Param("ID") int id);
 
-    @Transactional
     @Modifying
     @Query(
             value = "insert into products (product_name, number, selling_price, cost, supplier, date_listed, on_sale) " +

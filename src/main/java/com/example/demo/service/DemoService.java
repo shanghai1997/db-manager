@@ -5,6 +5,7 @@ import com.example.demo.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.awt.print.Pageable;
 import java.util.Arrays;
 import java.util.Collection;
@@ -22,11 +23,13 @@ public class DemoService {
         return pList;
     }
 
-    public int deleteSoldOut()
+    @Transactional
+    public void deleteProduct(Product p)
     {
-        return productRepository.deleteDeactivatedProducts();
+        productRepository.deleteProductByID(p.getId());
     }
 
+    @Transactional
     public void addNewProduct(Product p)
     {
         productRepository.insertUser(p.getProductName(), p.getNumber(), p.getPrice(), p.getCost(), p.getSupplier(), p.getListedDate(), true);
