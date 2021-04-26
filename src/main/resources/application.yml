@@ -7,8 +7,7 @@ spring:
     static-path-pattern: /static/**
 
   datasource:
-    #type: com.alibaba.druid.pool.DruidDataSource
-    jdbc-url: jdbc:mysql://47.101.142.113:3306/myManager?serverTimezone=UTC
+    url: jdbc:mysql://47.101.142.113:3306/myManager?serverTimezone=UTC
     username: root
     password: ad654790252
     driver-class-name: com.mysql.cj.jdbc.Driver

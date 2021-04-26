@@ -235,6 +235,49 @@
 </div>
 
 <script>
+    $(document).ready(function() {
+
+        // configure datatable
+        let meta=[{"id":"Please", "productName":"click", "number":"search", "price":"to", "cost":"display",
+            "supplier":"information", "listedDate":null, "soldOut":null}];
+        $('#example').DataTable({
+            "data" : meta,
+            "columnDefs": [
+                {
+                    'orderable': false,
+                    'data': null,
+                    'targets': 0,
+                    'defaultContent': ''
+                },
+                {
+                    'targets': 1, "title": "id", "data": "id"
+                },
+                {
+                    'targets': 2, "title": "product name", "data": "productName"
+                },
+                {
+                    'targets': 3, "title": "quantity in storage", "data": "number"
+                },
+                {
+                    'targets': 4, "title": "selling price", "data": "price"
+                },
+                {
+                    'targets': 5, "title": "cost", "data": "cost"
+                },
+                {
+                    'targets': 6, "title": "supplier", "data": "supplier"
+                },
+                {
+                    'targets': 7, "title": "listed date", "data": "listedDate"
+                },
+                {
+                    'targets': 8, "title": "Sold Out", "data": "soldOut"
+                }
+            ],
+        });
+
+    });
+
     var name;
     var num;
     var cost;
