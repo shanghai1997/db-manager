@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.3, minimum-scale=0.5">
     <title>Data Generator</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
@@ -27,6 +27,55 @@
     <!--引入多选-->
 
     <style type="text/css">
+
+        @media screen and (orientation: portrait) {
+            html {
+                width: 100%;
+                height: 100%;
+                background-color: white;
+                overflow: hidden;}
+        }
+
+        @media screen and (max-width:1600px){
+            body{font-size: 14px}
+            input{height: 32px}
+            label{height: 32px}
+            i{font-size: 14px}
+            .btn{font-size: 14px;
+                height:75px;
+                width:75px}
+            #deleteP{
+                height:50px;
+            }
+        }
+
+        @media screen and (max-width:1200px){
+            body{font-size: 12px}
+            input{height: 25px}
+            label{height: 25px}
+            i{font-size: 12px}
+            .btn{font-size: 12px;
+                 height:50px;
+                 width:50px}
+            #deleteP{
+                height:30px;
+            }
+        }
+
+        @media screen and (max-width:800px){
+            body{
+                font-size: 10px;
+            }
+            #deleteP{
+                width:auto;
+            }
+        }
+
+        @media screen and (max-width:240px){
+            body{
+                font-size: 6px;
+            }
+        }
 
         body {
             background-color: whitesmoke;
@@ -145,25 +194,25 @@
     <i class="mc-tmp-pane" style="position: absolute; left: 2.61506%; top: 3.0086%;">Environment</i>
     <label>
         <select id="environment1" class="form-control"
-                style="position: absolute; left: 2.40586%; top: 7.30659%; width:100px; height: 32px;">
+                style="position: absolute; left: 2.40586%; top: 7.30659%; width:5%;">
             <option value="1">QA</option>
             <option value="2">STAGE</option>
         </select>
     </label>
     <input id="name" class="form-control" placeholder="Product Name"
-           style="position: absolute; left: 18.6192%; top: 7.30659%; width: 12%; height: 32px;" type="text"
+           style="position: absolute; left: 18.6192%; top: 7.30659%; width: 12%;" type="text"
            aria-describedby="emailHelp"/>
     <input id="num" class="form-control" placeholder="Number"
-           style="position: absolute; left: 35.1464%; top: 7.30659%; width: 12%; height: 32px;" type="text"
+           style="position: absolute; left: 35.1464%; top: 7.30659%; width: 12%;" type="text"
            aria-describedby="emailHelp"/>
 
     <i>
         <input id="supplier" class="form-control" placeholder="Supplier"
-               style="position: absolute; left: 2.40586%; top: 15.6046%; height: 32px; width: 36%;" type="text"
+               style="position: absolute; left: 2.40586%; top: 15.6046%; width: 36%;" type="text"
                aria-describedby="emailHelp"/>
     </i>
     <input id="date" class="form-control" placeholder="Date Listed"
-           style="position: absolute; left: 41.2134%; top: 15.6046%; height: 32px; width: 22%;" type="text"
+           style="position: absolute; left: 41.2134%; top: 15.6046%; width: 22%;" type="text"
            aria-describedby="emailHelp"/>
     <i class="smallText" style="position: absolute; left: 42.40586%; top: 20%; width: 20%;">format: yyyy-mm-dd  eg: 2000-01-01</i>
     <span id="4b53da2d-4913-4051-b4c7-a2a80017acfc" class="form-check form-check-inline"
@@ -181,32 +230,32 @@
 		</label>
 	</span>
     <input id="pl_datetime" class="form-control" placeholder="Price"
-           style="position: absolute; left: 18.2929%; top: 27.3582%; height: 32px; width: 19%;" type="text"
+           style="position: absolute; left: 18.2929%; top: 27.3582%; width: 19%;" type="text"
            aria-describedby="emailHelp"/>
     <i class="smallText" style="position: absolute; left: 19.5%; top: 32%; width: 20%;"></i>
     <button id="insert" class="btn btn-info"
-            style="position: absolute; left: 79.2887%; top: 23.3582%; height: 75px; width: 75px;" type="button">Insert
+            style="position: absolute; left: 79.2887%; top: 23.3582%;" type="button">Insert
     </button>
     <hr style="position: absolute; left: 2.40586%; top: 33.5244%; width: 100%; background-color: rgb(153, 153, 153); border-top-style: double; height: 1px;"/>
 
     <i class="mc-tmp-pane" style="position: absolute; left: 2.40586%; top: 38.0086%;">Environment</i>
     <label>
         <select id="environment2" class="form-control"
-                style="position: absolute; left: 2.40586%; top: 42.4069%; height: 32px; width: 100px;">
+                style="position: absolute; left: 2.40586%; top: 42.4069%; width: 5%;">
             <option value="1">QA</option>
             <option value="2">STAGE</option>
         </select>
     </label>
 
     <input id="username2" class="form-control" placeholder="Username"
-           style="position: absolute; left: 2.40586%; top: 52.4069%; height: 32px; width: 12%;" type="text"/>
+           style="position: absolute; left: 2.40586%; top: 52.4069%; width: 12%;" type="text"/>
     <input id="password2" class="form-control" placeholder="Password"
-           style="position: absolute; left: 18.6192%; top: 52.4069%; width:12%; height: 32px;" type="text"/>
+           style="position: absolute; left: 18.6192%; top: 52.4069%; width: 12%;" type="text"/>
 
     <i class="mc-tmp-pane" style="position: absolute; left: 18.6192%; top: 38.1089%; width: 20%;">Study Plan Type</i>
     <label>
         <select id="studyPlanType" class="form-control"
-                style="position: absolute; left: 18.6192%; top: 42.4069%; height: 32px; width: 12%;">
+                style="position: absolute; left: 18.6192%; top: 42.4069%; width: 8%;">
             <option value="1">Homework</option>
             <option value="16">Progress Test</option>
             <option value="256">Class</option>
@@ -216,10 +265,10 @@
 
 
     <button id="deleteP" class="btn btn-info"
-            style="position: absolute; left: 74.7741%; top: 52.4069%; height: 35px; width: 14%;" type="button">Delete Products
+            style="position: absolute; left: 74.7741%; top: 52.4069%; width: 14%;" type="button">Delete Products
     </button>
     <button id="search" class="btn btn-info"
-            style="position: absolute; left: 79.2887%; top: 39.2607%; height: 75px; width: 75px;" type="button">Search
+            style="position: absolute; left: 79.2887%; top: 39.2607%;" type="button">Search
     </button>
     <div style="position: absolute; left: 3.03347%; top: 60.8739%;">
         <table id="example" class="table">
