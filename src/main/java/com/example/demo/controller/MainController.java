@@ -83,6 +83,12 @@ public class MainController {
         return "main";
     }
 
+    @RequestMapping(value = "/Astar", method = RequestMethod.GET)
+    public String Astar(ModelMap modelMap) {
+        modelMap.put("msg", "SpringBoot Ajax Sample");
+        return "Astar";
+    }
+
     @RequestMapping(value = "/loop", method = RequestMethod.GET)
     public String loop(ModelMap modelMap) {
         modelMap.put("msg", "SpringBoot Ajax Sample");
